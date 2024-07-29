@@ -30,6 +30,6 @@ app.get("/", (req, res) => {
 })
 
 app.listen(PORT, ()=>{
-    const db = connectDB()
+    // const db = connectDB()
     console.log(`Server running at ${PORT}`)
 })
