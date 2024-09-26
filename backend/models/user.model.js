@@ -25,11 +25,12 @@ const userSchema = new mongoose.Schema({
     },
     profile: {
         bio: { type: String },
-        skills: { tyype: String },
+        skills: { type: String },
         resume: { type: String },
         resumeOriginalName: { type: String },
         company: { type: mongoose.Schema.Types.ObjectId, ref: 'Company' },
-        photo: { type: String, default:'' }
+        photo: { type: String, default:'' },
+
     }
 }, {timestamps: true})
 

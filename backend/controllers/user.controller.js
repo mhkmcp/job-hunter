@@ -1,10 +1,11 @@
 import bcrypt from "bcryptjs"
 import jwt from 'jsonwebtoken'
-import { User } from "../models/user.model"
+import { User } from "../models/user.model.js"
 
 export const register = async(req, res) => {
     try {
         const { fullname, email, phone, password, role } = req.body
+        console.log(fullname, email, phone, password, role)
 
         if(!fullname || !email || !phone || !password || !role) {
             return res.status(400).json({
@@ -12,9 +13,12 @@ export const register = async(req, res) => {
                 success: false
             })
         }  
+        console.log('after first if')
         const user = await User.findOne({email})
         if(user) {
-            return res.status(400).json({
+            console.log('user found if')
+
+            return res.status(409).json({
                 message: "User exist with this email",
                 success: false
             })
@@ -142,7 +146,7 @@ export const updateProfile = async (req, res) => {
         if(phone)  user.phone = phone
         if(bio) user.profile.bio = bio
         if(skills) user.profile.skills = skillsArray
-        
+
         // resume 
         if(cloudResponse){
             user.profile.resume = cloudResponse.secure_url      // save the cloudinary url
